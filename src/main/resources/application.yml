@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: article-backend
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create    
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: trace
+    
+
+service:
+ props:
+  postNotFound: Article %d is Not Available
+  authorNotFound: Author %d is Not Available
+  keyWordNotFound: KeyWord %d is Not Available
+  noArticlesFound: No Articles are found as per filer criteria.
+  
+---
+
+spring:
+  profiles: test
+  jpa:
+    database: h2
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
